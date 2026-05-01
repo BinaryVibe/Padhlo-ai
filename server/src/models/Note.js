@@ -15,6 +15,11 @@ const noteSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    categoryId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: false, //old notes without categories don't break
+    },
   },
   { timestamps: true }
 );
