@@ -3,6 +3,7 @@ import cors from 'cors';
 import notesRoutes from './routes/notesRoutes.js';
 import userRoutes from "./routes/usersRoutes.js";
 import quizRoutes from './routes/quizRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/api', notesRoutes);
 app.use("/api/users", userRoutes);
 app.use('/api/quizzes', quizRoutes);
+app.use('/api/categories', categoryRoutes);
 
 
 export default app;
