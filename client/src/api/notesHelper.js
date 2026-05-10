@@ -4,8 +4,9 @@ const getNotesFromAI = async (topic, roughNotes) => {
   try {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem("userId");
-
-    const response = await axios.post('https://padhlo-ai-production.up.railway.app/api/generate-summary', 
+    const API_BASE_URL = import.meta.env.VITE_API_URL;
+    
+    const response = await axios.post('${API_BASE_URL}/api/generate-summary', 
       {
         topic,
         notes: roughNotes,
