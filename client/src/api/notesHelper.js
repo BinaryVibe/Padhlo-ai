@@ -6,7 +6,7 @@ const getNotesFromAI = async (topic, roughNotes) => {
     const userId = localStorage.getItem("userId");
     const API_BASE_URL = import.meta.env.VITE_API_URL;
     
-    const response = await axios.post('${API_BASE_URL}/api/generate-summary', 
+    const response = await axios.post(`${API_BASE_URL}/generate-summary`, 
       {
         topic,
         notes: roughNotes,

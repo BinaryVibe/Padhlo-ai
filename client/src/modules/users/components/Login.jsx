@@ -20,7 +20,7 @@ const Login = ({ setIsLoggedIn }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = 'h${API_BASE_URL}/api/users/login';
+      const url = `${API_BASE_URL}/users/login`;
       const { data: res } = await axios.post(url, data);
       localStorage.setItem('token', res.token);
       localStorage.setItem("userId", res.userId);
