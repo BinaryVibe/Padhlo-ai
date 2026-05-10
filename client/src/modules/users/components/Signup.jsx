@@ -14,7 +14,7 @@ const Signup = () => {
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
-
+    const API_BASE_URL = import.meta.env.VITE_API_URL;
     const handleChange = ({currentTarget: input}) => {
         setData({...data, [input.name]: input.value});
     };
@@ -22,7 +22,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const url = 'https://padhlo-ai-production.up.railway.app/api/users/signup';
+            const url = '${API_BASE_URL}/api/users/signup';
             const {data: res} = await axios.post(url, data);
             navigate('/login')
             console.log(res.message);
