@@ -10,7 +10,7 @@ const Login = ({ setIsLoggedIn }) => {
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
-
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
   const [loginSuccess, setLoginSuccess] = useState(false); 
 
   const handleChange = ({ currentTarget: input }) => {
@@ -20,7 +20,7 @@ const Login = ({ setIsLoggedIn }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = 'https://padhlo-ai-production.up.railway.app/api/users/login';
+      const url = 'h${API_BASE_URL}/api/users/login';
       const { data: res } = await axios.post(url, data);
       localStorage.setItem('token', res.token);
       localStorage.setItem("userId", res.userId);
