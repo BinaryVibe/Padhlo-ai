@@ -29,4 +29,41 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-  
+  /* Sidebar Layout CSS */
+.notes-page-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #e0e0e0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.sidebar-title { margin-top: 0; }
+.create-folder-btn {
+  background-color: #007bff; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; margin-bottom: 20px; font-weight: bold;
+}
+.folder-list { list-style: none; padding: 0; margin: 0; overflow-y: auto; }
+.folder-list li { padding: 10px; margin-bottom: 5px; border-radius: 5px; cursor: pointer; color: #333; }
+.folder-list li:hover { background-color: #f1f1f1; }
+.active-folder { background-color: #e6f2ff !important; color: #007bff !important; font-weight: bold; }
+
+/* Modal CSS */
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+.modal-content { background: white; padding: 20px 30px; border-radius: 8px; width: 350px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.folder-input { width: 100%; padding: 10px; margin: 15px 0; border: 1px solid #ccc; border-radius: 4px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+.save-btn { background: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
+.cancel-btn { background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
