@@ -10,9 +10,10 @@ const genAi = new GoogleGenAI({
 
 const generateSummary = async (req, res) => {
   try {
-    const { topic, notes, userId } = req.body;
+    // UPDATE: Extracting categoryId from frontend request
+    const { topic, notes, userId, categoryId } = req.body;
 
-    console.log("Received on backend:", { topic, notes, userId });
+    console.log("Received on backend:", { topic, notes, userId, categoryId });
 
     
     if (!topic || !notes) {
@@ -39,6 +40,7 @@ Return a clear explanation with headings, bullet points, and simple language.`;
       userId: finalUserId,
       topic: topic,
       content: text,
+      categoryId: categoryId || null // UPDATE: Saving categoryId to DB
     });
 
     const savedNote = await newNote.save();
