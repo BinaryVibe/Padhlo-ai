@@ -58,7 +58,7 @@
 .folder-list { list-style: none; padding: 0; margin: 0; overflow-y: auto;  flex: 1;}
 .folder-list li { padding: 10px; margin-bottom: 5px; border-radius: 5px; cursor: pointer; color: #333; }
 .folder-list li:hover { background-color: #f1f1f1; }
-.active-folder { background-color: #e6f2ff !important; color: #007bff !important; font-weight: bold; }`
+.active-folder { background-color: #e6f2ff !important; color: #007bff !important; font-weight: bold; }
 
 /* Modal CSS */
 .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; }
