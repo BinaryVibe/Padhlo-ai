@@ -15,6 +15,7 @@ const NotesPage = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null); // null = "All Notes"
   const [showModal, setShowModal] = useState(false);
   const [newFolderName, setNewFolderName] = useState("");
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 
   const handleGeneratedNotes = async (topic, roughNotes) => {
@@ -36,7 +37,7 @@ const NotesPage = () => {
       
       try {
         const response = await axios.get(
-          "https://padhlo-ai-production.up.railway.app/api/get-all-notes",
+          `${API_BASE_URL}/get-all-notes`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
