@@ -29,7 +29,7 @@ Rough Notes: ${notes}
 Return a clear explanation with headings, bullet points, and simple language.`;
 
     const response = await genAi.models.generateContent({
-      model: "gemini-2.0-flash", 
+      model: "gemini-2.5-flash", 
       contents: prompt,
     });
 
