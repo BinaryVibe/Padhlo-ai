@@ -11,7 +11,6 @@ const QuizPage = () => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [quizResult, setQuizResult] = useState(null);
 
-  // 1. Page load hote hi saare notes fetch karna
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -29,7 +28,6 @@ const QuizPage = () => {
     fetchNotes();
   }, []);
 
-  // 2. Select kiye gaye note par Quiz Generate karna
   const handleGenerateQuiz = async () => {
     if (!selectedNoteId) return alert("Please select a note first!");
     
@@ -42,7 +40,6 @@ const QuizPage = () => {
     setSelectedOptions({});
     
     try {
-      // Yahan humne .title ki jagah .topic aur .content ki jagah .summary add kiya hai
       const noteTitle = selectedNote.topic || selectedNote.title || "Untitled Note";
       const noteContent = selectedNote.summary || selectedNote.content || selectedNote.notes || "General concepts";
       
@@ -54,13 +51,11 @@ const QuizPage = () => {
     setLoading(false);
   };
 
-  // 3. Option Select Karna
   const handleOptionSelect = (qIndex, option) => {
     if (quizResult) return; 
     setSelectedOptions({ ...selectedOptions, [qIndex]: option });
   };
 
-  // 4. Quiz Submit Karna aur Score Save Karna
   const handleSubmitQuiz = async () => {
     if (Object.keys(selectedOptions).length < questions.length) {
       return alert("Please answer all questions before submitting!");
@@ -73,7 +68,6 @@ const QuizPage = () => {
 
     setQuizResult({ score, total: questions.length });
 
-    // Database mein Score save karo
     try {
       const selectedNote = notes.find(n => n._id === selectedNoteId);
       const noteTitle = selectedNote.topic || selectedNote.title || "Untitled Note";
@@ -92,13 +86,12 @@ const QuizPage = () => {
   };
 
   return (
-    <div className="quiz-page-container">
+<div className="quiz-page-container">
       <div className="quiz-header">
-        <h1>🧠 Notes to AI Quiz</h1>
-        <p>Select your generated note to create a customized quiz!</p>
+        <h1>Quiz Generator</h1>
+        <p className="quiz-slogan">Select your generated note to create a customized quiz!</p>
       </div>
 
-      {/* DROPDOWN SECTION */}
       <div className="quiz-input-section">
         <select 
           className="notes-dropdown"
@@ -106,13 +99,12 @@ const QuizPage = () => {
           onChange={(e) => setSelectedNoteId(e.target.value)}
           disabled={loading || questions.length > 0}
         >
-          <option value="">-- Select a Note to Generate Quiz --</option>
+          <option value="">Select a Note to Generate Quiz</option>
           {notes.map(note => {
-            // Yahan hum note ka naam nikal rahe hain (chahay topic ho ya title)
             const displayTitle = note.topic || note.title || "Unnamed Note";
             return (
               <option key={note._id} value={note._id}>
-                📄 {displayTitle}
+                {displayTitle}
               </option>
             );
           })}
@@ -120,7 +112,7 @@ const QuizPage = () => {
 
         {questions.length === 0 && (
           <button onClick={handleGenerateQuiz} disabled={loading || !selectedNoteId} className="gen-btn">
-            {loading ? "Generating Magic... ✨" : "Generate Quiz"}
+            {loading ? "Generating Quiz..." : "Generate Quiz"}
           </button>
         )}
         {questions.length > 0 && (
@@ -130,7 +122,6 @@ const QuizPage = () => {
         )}
       </div>
 
-      {/* QUIZ SECTION */}
       {questions.length > 0 && (
         <div className="quiz-questions-box">
           {questions.map((q, index) => (
@@ -159,11 +150,11 @@ const QuizPage = () => {
 
           {!quizResult ? (
              <button className="submit-quiz-btn" onClick={handleSubmitQuiz}>
-              Submit Answers & Save Score ✅
+              Submit Answers & Save Score
             </button>
           ) : (
             <div className="result-box">
-              <h2>Your Score: {quizResult.score} / {quizResult.total} 🎯</h2>
+              <h2>Your Score: {quizResult.score} / {quizResult.total}</h2>
               <p>{quizResult.score >= 3 ? "Great Job! Your score is saved." : "Needs revision. Your score is saved!"}</p>
             </div>
           )}

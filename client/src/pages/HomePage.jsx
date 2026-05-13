@@ -10,6 +10,7 @@ const HomePage = () => {
 
   return (
     <div>
+      {/* --- TOP SECTION (UNTOUCHED) --- */}
       <div className="main-heading">
         <h1 className="text">AI-Powered Study Assisstant</h1>
         <h4 className="text">Learn Better. Faster. Easier.</h4>
@@ -55,40 +56,50 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="bottom-sec" id="about-section">
-        <div className="about">
-          <h2>About Padhlo AI</h2>
-          <p>
-            Padhlo AI is an educational web app designed to help students learn
-            smarter. It includes two powerful tools — a{" "}
-            <strong>Notes Helper</strong> that turns your rough notes into
-            clean, structured study material, and a{" "}
-            <strong>Quiz Generator</strong> that creates MCQs from any topic
-            instantly using AI.
-          </p>
-        </div>
+      {/* --- UPDATED BOTTOM SECTION (Full Width & Consistent) --- */}
+      <div className="bottom-sec-wrapper">
+        <div className="bottom-sec" id="about-section">
+          
+          <div className="bottom-top-row">
+            <div className="about">
+              <h2>About Padhlo AI</h2>
+              <p>
+                Padhlo AI is an educational web app designed to help students learn
+                smarter. It includes two powerful tools — a{" "}
+                <strong>Notes Helper</strong> that turns your rough notes into
+                clean, structured study material, and a{" "}
+                <strong>Quiz Generator</strong> that creates MCQs from any topic
+                instantly using AI.
+              </p>
+            </div>
+          </div>
 
-        <div className="creator">
-          <h3>Made by</h3>
-          <p>
-            <strong>Ayaan Ahmed Khan</strong>
-            <br />
-            Student | Developer | Learning with AI
-            <br />
-            <a href="https://www.linkedin.com/in/ayaan-ahmed-khan-448600351">Let's connect</a>
-          </p>
-        </div>
+          <div className="bottom-bottom-row">
+            <div className="creator">
+              <h3>Made by</h3>
+              <p>
+                <strong>Ayaan Ahmed Khan</strong>
+                <br />
+                Student | Developer | Learning with AI
+                <br />
+                <a href="https://www.linkedin.com/in/ayaan-ahmed-khan-448600351" target="_blank" rel="noopener noreferrer">Let's connect</a>
+              </p>
+            </div>
 
-        <div className="project-info">
-          <h3>Tech Stack</h3>
-          <ul>
-            <li>Frontend: React</li>
-            <li>Backend: Node.js + Express</li>
-            <li>Database: MongoDB (optional)</li>
-            <li>AI: Gemini API (for notes and quiz)</li>
-          </ul>
+            <div className="project-info">
+              <h3>Tech Stack</h3>
+              <ul>
+                <li>Frontend: React</li>
+                <li>Backend: Node.js + Express</li>
+                <li>Database: MongoDB (optional)</li>
+                <li>AI: Gemini API (for notes and quiz)</li>
+              </ul>
+            </div>
+          </div>
+          
         </div>
       </div>
+
     </div>
   );
 };

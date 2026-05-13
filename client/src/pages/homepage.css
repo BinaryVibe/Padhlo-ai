@@ -125,35 +125,86 @@
   padding-top: 35px;
 }
 
+/* ========================================================= */
+/* --- UPDATED BOTTOM SECTION (Matching Dashboard exactly) --- */
+/* ========================================================= */
+
+.bottom-sec-wrapper {
+    width: 100%;
+    background-color: #4e76ff;
+    margin-top: 100px; /* Pushes the footer down cleanly from the top content */
+}
 
 .bottom-sec {
-    background-color: #4e76ff;
+    max-width: 1200px;
+    margin: 0 auto;
     color: #e6f1ff;
-    padding: 3em 2em;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 2em;
+    padding: 60px 40px;
     font-family: 'Segoe UI', sans-serif;
     font-size: 1em;
-    margin-top: 3em;
-  }
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.bottom-top-row {
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 30px;
+}
+
+.bottom-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
   
-  .bottom-sec h2, .bottom-sec h3 {
-    color: #e6f1ff;
-  }
+.bottom-sec h2, .bottom-sec h3 {
+    color: white;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.bottom-sec p {
+    line-height: 1.6;
+    margin: 0;
+}
   
-  .bottom-sec a {
-    color: #e6f1ff;
-    text-decoration: none;
-  }
-  
-  .bottom-sec a:hover {
+.bottom-sec a {
+    color: white;
     text-decoration: underline;
-  }
+    font-weight: bold;
+}
   
-  .bottom-sec ul {
-    list-style-type: disc;
-    padding-left: 1.2em;
-  }
+.bottom-sec a:hover {
+    color: #f4f6f8;
+}
   
+.bottom-sec ul {
+    list-style-type: none; 
+    padding-left: 0;
+    margin: 0;
+}
+
+.bottom-sec ul li {
+    margin-bottom: 8px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.bottom-sec ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: rgba(255,255,255,0.6);
+}
+
+/* Responsive adjustments for the new footer */
+@media (max-width: 768px) {
+    .bottom-sec {
+        padding: 40px 20px;
+    }
+    .bottom-bottom-row {
+        flex-direction: column;
+        gap: 30px;
+    }
+}

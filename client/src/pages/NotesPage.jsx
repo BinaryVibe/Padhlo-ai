@@ -102,10 +102,9 @@ const NotesPage = () => {
     : generatedNotes.filter(note => note.categoryId === selectedCategoryId);
 
   return (
-    <div className="notes-page-layout" onClick={() => setActiveDropdown(null)}> {/* Close dropdown if clicked outside */}
+    <div className="notes-page-layout" onClick={() => setActiveDropdown(null)}> 
       
       <div className="sidebar">
-        <h3 className="sidebar-title">My Folders</h3>
         <button className="create-folder-btn" onClick={() => setShowModal(true)}>
           + New Folder
         </button>
@@ -115,7 +114,7 @@ const NotesPage = () => {
             className={selectedCategoryId === null ? "active-folder" : ""}
             onClick={() => setSelectedCategoryId(null)}
           >
-            📂 All Notes
+            All Notes
           </li>
           
           {categories.map((cat) => (
@@ -125,9 +124,8 @@ const NotesPage = () => {
               onClick={() => setSelectedCategoryId(cat._id)}
               style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative' }} 
             >
-              <span style={{flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>📁 {cat.name}</span>
+              <span style={{flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{cat.name}</span>
               
-              {/* 3-Dots Menu Button */}
               <button 
                 className="three-dots-btn"
                 onClick={(e) => {
@@ -138,7 +136,6 @@ const NotesPage = () => {
                 ⋮
               </button>
 
-              {/* Dropdown Menu */}
               {activeDropdown === cat._id && (
                 <div className="dropdown-menu">
                   <button onClick={(e) => {
@@ -147,12 +144,12 @@ const NotesPage = () => {
                     setEditFolderName(cat.name);
                     setShowRenameModal(true);
                     setActiveDropdown(null);
-                  }}>✏️ Rename</button>
+                  }}> Rename</button>
                   <button onClick={(e) => {
                     e.stopPropagation();
                     handleDeleteFolder(cat._id);
                     setActiveDropdown(null);
-                  }} style={{color: 'red'}}>🗑️ Delete</button>
+                  }} style={{color: 'red'}}> Delete</button>
                 </div>
               )}
             </li>
@@ -178,7 +175,6 @@ const NotesPage = () => {
         </div>
       </div>
 
-      {/* CREATE Modal */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -192,7 +188,6 @@ const NotesPage = () => {
         </div>
       )}
 
-      {/* RENAME Modal */}
       {showRenameModal && (
         <div className="modal-overlay">
           <div className="modal-content">
