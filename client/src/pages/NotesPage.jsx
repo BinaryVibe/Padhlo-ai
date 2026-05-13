@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./notespage.css";
 import NotesGeneratorBox from "../modules/notes-helper/components/NotesGeneratorBox";
 import GeneratedNotes from "../modules/notes-helper/components/GeneratedNotes";
-import { getNotesFromAI, getUserCategories, createCategory, deleteCategory, renameCategory } from "../api/notesHelper"; 
+import { getNotesFromAI } from "../api/notesHelper"; 
+import { getUserCategories, createCategory, deleteCategory, renameCategory } from "../api/categoryHelper";
 import axios from "axios";
 
 const NotesPage = () => {
