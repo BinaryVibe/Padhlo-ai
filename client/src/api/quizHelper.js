@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-// AI se Questions generate karwane ki API
-export const generateQuizFromAI = async (topic) => {
+// AI se Questions generate karwana (Ab content bhi bheje ga)
+export const generateQuizFromAI = async (topic, content) => {
   try {
     const token = localStorage.getItem('token');
     const API_BASE_URL = import.meta.env.VITE_API_URL;
     
     const response = await axios.post(`${API_BASE_URL}/quizzes/generate`, 
-      { topic },
+      { topic, content },
       { headers: { Authorization: `Bearer ${token}` } }
     );
     return response.data.questions;
@@ -17,14 +17,14 @@ export const generateQuizFromAI = async (topic) => {
   }
 };
 
-// Quiz ko Score ke sath Database mein save karne ki API
-export const saveQuizToDB = async (title, questions) => {
+// Quiz aur Score save karna
+export const saveQuizToDB = async (noteId, title, questions, score, totalQuestions) => {
   try {
     const token = localStorage.getItem('token');
     const API_BASE_URL = import.meta.env.VITE_API_URL;
     
     const response = await axios.post(`${API_BASE_URL}/quizzes/save`, 
-      { title, questions },
+      { noteId, title, questions, score, totalQuestions },
       { headers: { Authorization: `Bearer ${token}` } }
     );
     return response.data;
@@ -32,4 +32,4 @@ export const saveQuizToDB = async (title, questions) => {
     console.error("Error saving quiz:", error);
     throw error;
   }
-};
+};  

@@ -1,6 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import Note from '../models/Note.js';
+import UserStats from '../models/UserStats.js'; 
 
 dotenv.config();
 
@@ -10,23 +11,20 @@ const genAi = new GoogleGenAI({
 
 const generateSummary = async (req, res) => {
   try {
-    // UPDATE: Extracting categoryId from frontend request
     const { topic, notes, userId, categoryId } = req.body;
 
     console.log("Received on backend:", { topic, notes, userId, categoryId });
 
-    
     if (!topic || !notes) {
       return res.status(400).json({ error: "Topic and notes are required." });
     }
 
-    
-    const finalUserId = userId || null;  
+    const finalUserId = userId || req.user?._id || null;  
 
     const prompt = `You are a study assistant. Format and improve the following rough notes into clean, structured notes based on the topic.
-Topic: ${topic}
-Rough Notes: ${notes}
-Return a clear explanation with headings, bullet points, and simple language.`;
+    Topic: ${topic}
+    Rough Notes: ${notes}
+    Return a clear explanation with headings, bullet points, and simple language.`;
 
     const response = await genAi.models.generateContent({
       model: "gemini-2.5-flash", 
@@ -35,15 +33,31 @@ Return a clear explanation with headings, bullet points, and simple language.`;
 
     const text = response.text;
 
-    // Save to MongoDB 
+    // NOTE SAVE LOGIC: 'content' field use kiya hai taake validation error na aaye
     const newNote = new Note({
       userId: finalUserId,
       topic: topic,
-      content: text,
-      categoryId: categoryId || null // UPDATE: Saving categoryId to DB
+      content: text, 
+      categoryId: categoryId || null 
     });
 
-    const savedNote = await newNote.save();
+    await newNote.save();
+
+    // DASHBOARD STATS LOGIC: Notes count update karne ke liye
+    try {
+      if (finalUserId) {
+        await UserStats.findOneAndUpdate(
+          { userId: finalUserId },
+          { 
+            $inc: { totalNotesGenerated: 1 }, 
+            $set: { lastActivity: Date.now() } 
+          },
+          { upsert: true, new: true }
+        );
+      }
+    } catch (statError) {
+      console.error("UserStats Update Error:", statError);
+    }
 
     res.status(201).json({ summary: text });
   } catch (e) {
@@ -52,18 +66,15 @@ Return a clear explanation with headings, bullet points, and simple language.`;
   }
 };
 
-
-
 const getAllNotes = async (req, res) => {
   try {
-    const userId = req.user._id; 
+    const userId = req.user?._id; 
 
     if (!userId) {
       return res.status(400).json({ error: "UserId is required." });
     }
 
     const notes = await Note.find({ userId });
-
     res.status(200).json(notes);
   } catch (e) {
     console.error("Error fetching notes:", e);
@@ -71,5 +82,4 @@ const getAllNotes = async (req, res) => {
   }
 };
 
-
-export { generateSummary , getAllNotes };
+export { generateSummary, getAllNotes };

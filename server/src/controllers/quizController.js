@@ -10,7 +10,7 @@ const genAi = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
-// 1. Generate Quiz using Gemini AI
+// 1. Generate Quiz using Gemini AI (Notes based)
 export const generateQuizFromAI = async (req, res) => {
   try {
     const { topic, content } = req.body;
@@ -52,26 +52,33 @@ export const generateQuizFromAI = async (req, res) => {
   }
 };
 
-// 2. Save the Quiz to Database
+// 2. Save the Quiz to Database (with Score)
 export const saveQuiz = async (req, res) => {
     try {
-        const { noteId, title, questions } = req.body;
+        const { noteId, title, questions, score, totalQuestions } = req.body;
         const userId = req.user._id; 
 
-        const newQuiz = new Quiz({ userId, noteId: noteId || null, title });
+        // Quiz meta-data with score save karein
+        const newQuiz = new Quiz({ userId, noteId: noteId || null, title, score, totalQuestions });
         const savedQuiz = await newQuiz.save();
 
+        // Questions save karein
         const questionsWithQuizId = questions.map(q => ({
             ...q,
             quizId: savedQuiz._id
         }));
         await Question.insertMany(questionsWithQuizId);
 
+        // UserStats Update karein (Total Score aur Quizzes)
         try {
             await UserStats.findOneAndUpdate(
                 { userId },
                 { 
-                    $inc: { totalQuizzesTaken: 1, totalQuestionsAnswered: questions.length },
+                    $inc: { 
+                        totalQuizzesTaken: 1, 
+                        totalQuestionsAnswered: questions.length,
+                        totalScore: score 
+                    },
                     $set: { lastActivity: Date.now() }
                 },
                 { upsert: true, new: true } 

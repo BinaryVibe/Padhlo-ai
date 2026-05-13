@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { User, validate } from "../models/User.js";
+import UserStats from "../models/UserStats.js"; // <--- NAYA: Stats Model Import Kiya
 import bcrypt from "bcrypt";
 
 // Sign Up
@@ -26,7 +27,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-//validation
+// Validation
 const loginValidation = (data) => {
   const schema = Joi.object({
     email: Joi.string().email().required().label("Email"),
@@ -35,7 +36,7 @@ const loginValidation = (data) => {
   return schema.validate(data);
 };
 
-//Login
+// Login
 const loginUser = async (req, res) => {
   try {
     const { error } = loginValidation(req.body);
@@ -66,4 +67,25 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser };
+// <--- NAYA FUNCTION: Get User Stats --->
+const getUserStats = async (req, res) => {
+  try {
+    const stats = await UserStats.findOne({ userId: req.user._id });
+    
+    // Agar naya user hai aur abhi tak koi stat nahi bana
+    if (!stats) {
+      return res.status(200).json({
+        totalNotesGenerated: 0,
+        totalQuizzesTaken: 0,
+        totalQuestionsAnswered: 0,
+        totalScore: 0
+      });
+    }
+    res.status(200).json(stats);
+  } catch (error) {
+    console.error("Error fetching stats:", error);
+    res.status(500).json({ message: "Failed to fetch dashboard stats." });
+  }
+};
+
+export { registerUser, loginUser, getUserStats }; // <--- Export mein add kiya

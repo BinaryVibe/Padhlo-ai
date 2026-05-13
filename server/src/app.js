@@ -7,18 +7,14 @@ import categoryRoutes from './routes/categoryRoutes.js';
 
 const app = express();
 
-//Middlewares
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
-//Routes
+// Routes
 app.use('/api', notesRoutes);
 app.use("/api/users", userRoutes);
 app.use('/api/quizzes', quizRoutes);
 app.use('/api/categories', categoryRoutes);
 
-
 export default app;
-
-
-

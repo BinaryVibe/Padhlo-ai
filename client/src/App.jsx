@@ -5,6 +5,7 @@ import BookIcon from "./assets/reading-book.png";
 import HomePage from "./pages/HomePage";
 import NotesPage from "./pages/NotesPage";
 import QuizPage from "./pages/QuizPage";
+import DashboardPage from "./pages/DashboardPage"; // <--- NAYA: Dashboard Import Kiya
 import Login from "./modules/users/components/Login";
 import Signup from "./modules/users/components/Signup";
 
@@ -28,7 +29,6 @@ const RootLayout = ({ isLoggedIn, setIsLoggedIn }) => {
   const forceUpdate = useCallback(() => updateState({}), []);
   const isMounted = useRef(true);
 
-  
   useEffect(() => {
     if (isLoggedIn && isMounted.current && (location.pathname === "/login" || location.pathname === "/signup")) {
       navigate("/");
@@ -49,7 +49,6 @@ const RootLayout = ({ isLoggedIn, setIsLoggedIn }) => {
       // Force update RootLayout *b4 navigating
       forceUpdate();
 
-      
       Promise.resolve().then(() => {
         navigate("/", { replace: true });
         setTimeout(() => {
@@ -74,6 +73,10 @@ const RootLayout = ({ isLoggedIn, setIsLoggedIn }) => {
 
         <div className="nav-links">
           <Link to="/">Home</Link>
+          
+          {/* <--- NAYA: Agar user login hai toh Dashboard ka link show karo ---> */}
+          {isLoggedIn && <Link to="/dashboard">Dashboard</Link>} 
+
           <Link
             to="https://github.com/Ersatz-xD/Padhlo-ai"
             target="_blank"
@@ -144,6 +147,7 @@ const App = () => {
         <Route index element={<HomePage />} />
         <Route path="notes-page" element={<NotesPage />} />
         <Route path="quiz-page" element={<QuizPage />} />
+        <Route path="dashboard" element={<DashboardPage />} /> {/* <--- NAYA ROUTE: Dashboard ---> */}
         <Route path="login" element={<Login setIsLoggedIn={updateLoginState} />} />  {/* Pass to Login too */}
         <Route path="signup" element={<Signup />} />
       </Route>
