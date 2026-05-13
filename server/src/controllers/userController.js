@@ -1,9 +1,10 @@
 import Joi from "joi";
 import { User, validate } from "../models/User.js";
-import UserStats from "../models/UserStats.js"; // <--- NAYA: Stats Model Import Kiya
+import Note from "../models/Note.js";
+import Quiz from "../models/Quiz.js";
+import UserStats from "../models/UserStats.js"; 
 import bcrypt from "bcrypt";
 
-// Sign Up
 const registerUser = async (req, res) => {
   try {
     const { error } = validate(req.body);
@@ -27,7 +28,6 @@ const registerUser = async (req, res) => {
   }
 };
 
-// Validation
 const loginValidation = (data) => {
   const schema = Joi.object({
     email: Joi.string().email().required().label("Email"),
@@ -36,7 +36,6 @@ const loginValidation = (data) => {
   return schema.validate(data);
 };
 
-// Login
 const loginUser = async (req, res) => {
   try {
     const { error } = loginValidation(req.body);
@@ -67,25 +66,26 @@ const loginUser = async (req, res) => {
   }
 };
 
-// <--- NAYA FUNCTION: Get User Stats --->
 const getUserStats = async (req, res) => {
   try {
-    const stats = await UserStats.findOne({ userId: req.user._id });
+    const userId = req.user._id;
+
+    const actualNotesCount = await Note.countDocuments({ userId: userId });
+    const actualQuizzesCount = await Quiz.countDocuments({ userId: userId });
+
+    const stats = await UserStats.findOne({ userId: userId });
     
-    // Agar naya user hai aur abhi tak koi stat nahi bana
-    if (!stats) {
-      return res.status(200).json({
-        totalNotesGenerated: 0,
-        totalQuizzesTaken: 0,
-        totalQuestionsAnswered: 0,
-        totalScore: 0
-      });
-    }
-    res.status(200).json(stats);
+    res.status(200).json({
+      totalNotesGenerated: actualNotesCount, 
+      totalQuizzesTaken: actualQuizzesCount, 
+      totalQuestionsAnswered: stats ? stats.totalQuestionsAnswered : 0,
+      totalScore: stats ? stats.totalScore : 0
+    });
+
   } catch (error) {
     console.error("Error fetching stats:", error);
     res.status(500).json({ message: "Failed to fetch dashboard stats." });
   }
 };
 
-export { registerUser, loginUser, getUserStats }; // <--- Export mein add kiya
+export { registerUser, loginUser, getUserStats };

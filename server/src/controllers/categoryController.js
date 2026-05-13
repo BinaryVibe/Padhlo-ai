@@ -40,7 +40,6 @@ export const deleteCategory = async (req, res) => {
   }
 };
 
-// NEW: Rename a Category
 export const updateCategory = async (req, res) => {
   try {
     const { name } = req.body;

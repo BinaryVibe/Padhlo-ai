@@ -49,7 +49,6 @@ const DashboardPage = () => {
   return (
     <div className="dashboard-page-layout">
       
-      {/* 1. Main Content Area (Constrained Width) */}
       <div className="dashboard-main-content">
         
         <div className="dashboard-header-section">
@@ -57,7 +56,6 @@ const DashboardPage = () => {
           <p className="dashboard-slogan">Analytics and insights into your AI study journey.</p>
         </div>
 
-        {/* CSS GRID OVERVIEW */}
         <div className="stats-grid-container">
           
           <div className="analytics-card">
@@ -110,7 +108,6 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      {/* 2. Bottom Section (Moved OUTSIDE main content, now Full Width) */}
       <div className="bottom-sec-wrapper">
         <div className="bottom-sec" id="about-section">
             

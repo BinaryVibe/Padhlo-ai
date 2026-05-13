@@ -33,7 +33,6 @@ const generateSummary = async (req, res) => {
 
     const text = response.text;
 
-    // NOTE SAVE LOGIC: 'content' field use kiya hai taake validation error na aaye
     const newNote = new Note({
       userId: finalUserId,
       topic: topic,
@@ -43,7 +42,6 @@ const generateSummary = async (req, res) => {
 
     await newNote.save();
 
-    // DASHBOARD STATS LOGIC: Notes count update karne ke liye
     try {
       if (finalUserId) {
         await UserStats.findOneAndUpdate(
