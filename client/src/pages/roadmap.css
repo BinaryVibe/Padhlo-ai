@@ -1,0 +1,222 @@
+.roadmap-page-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.roadmap-header h1 {
+  color: #242e4a;
+  margin-bottom: 5px;
+}
+
+.roadmap-header p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+/* Controls */
+.roadmap-controls {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.roadmap-dropdown {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  font-size: 1rem;
+  outline: none;
+}
+
+.roadmap-dropdown:focus {
+  border-color: #4e76ff;
+}
+
+.create-new-btn {
+  padding: 12px 25px;
+  background-color: #242e4a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.create-new-btn:hover {
+  background-color: #4e76ff;
+}
+
+/* Form */
+.roadmap-form {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.roadmap-form input, .roadmap-form textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.gen-roadmap-btn {
+  padding: 15px;
+  background-color: #4e76ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gen-roadmap-btn:hover:not(:disabled) {
+  background-color: #3b5bdb;
+}
+
+.gen-roadmap-btn:disabled {
+  background-color: #a5b4fc;
+  cursor: not-allowed;
+}
+
+/* Display */
+.roadmap-title-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-top: 15px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #4e76ff;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 12px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #4e76ff;
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Timeline/Days */
+.days-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.day-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  border-left: 5px solid #4e76ff;
+  overflow: hidden;
+}
+
+.day-header {
+  background: #f8f9fa;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.day-header h3 {
+  margin: 0;
+  color: #242e4a;
+}
+
+.day-theme {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+/* Tasks */
+.tasks-list {
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 1px solid transparent;
+}
+
+.task-item:hover {
+  background: #f0f4ff;
+  border-color: #dbe4ff;
+}
+
+.task-item.completed {
+  opacity: 0.6;
+}
+
+.task-item.completed .task-content h4 {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.task-item input[type="checkbox"] {
+  margin-top: 5px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.task-content h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.05rem;
+  color: #333;
+}
+
+.task-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}

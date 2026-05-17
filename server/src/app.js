@@ -4,6 +4,7 @@ import notesRoutes from './routes/notesRoutes.js';
 import userRoutes from "./routes/usersRoutes.js";
 import quizRoutes from './routes/quizRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
+import roadmapRoutes from './routes/roadmapRoutes.js'; // new line
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use('/api', notesRoutes);
 app.use("/api/users", userRoutes);
 app.use('/api/quizzes', quizRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/roadmaps', roadmapRoutes); // <--- new line
 
 export default app;

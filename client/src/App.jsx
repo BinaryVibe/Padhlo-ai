@@ -5,9 +5,10 @@ import BookIcon from "./assets/reading-book.png";
 import HomePage from "./pages/HomePage";
 import NotesPage from "./pages/NotesPage";
 import QuizPage from "./pages/QuizPage";
-import DashboardPage from "./pages/DashboardPage"; // <--- NAYA: Dashboard Import Kiya
+import DashboardPage from "./pages/DashboardPage"; 
 import Login from "./modules/users/components/Login";
 import Signup from "./modules/users/components/Signup";
+import RoadmapPage from "./pages/RoadmapPage"; // <--- Roadmap Import
 
 import {
   createBrowserRouter,
@@ -74,8 +75,9 @@ const RootLayout = ({ isLoggedIn, setIsLoggedIn }) => {
         <div className="nav-links">
           <Link to="/">Home</Link>
           
-          {/* <--- NAYA: Agar user login hai toh Dashboard ka link show karo ---> */}
+          {/* Dashboard and Roadmap links for logged-in users */}
           {isLoggedIn && <Link to="/dashboard">Dashboard</Link>} 
+          {isLoggedIn && <Link to="/roadmap">Roadmaps</Link>} {/* <--- NAYA: Roadmap Link Add Kiya ---> */}
 
           <Link
             to="https://github.com/Ersatz-xD/Padhlo-ai"
@@ -147,8 +149,9 @@ const App = () => {
         <Route index element={<HomePage />} />
         <Route path="notes-page" element={<NotesPage />} />
         <Route path="quiz-page" element={<QuizPage />} />
-        <Route path="dashboard" element={<DashboardPage />} /> {/* <--- NAYA ROUTE: Dashboard ---> */}
-        <Route path="login" element={<Login setIsLoggedIn={updateLoginState} />} />  {/* Pass to Login too */}
+        <Route path="dashboard" element={<DashboardPage />} /> 
+        <Route path="roadmap" element={<RoadmapPage />} /> {/* <--- NAYA: Roadmap Route Add Kiya ---> */}
+        <Route path="login" element={<Login setIsLoggedIn={updateLoginState} />} />  
         <Route path="signup" element={<Signup />} />
       </Route>
     )
