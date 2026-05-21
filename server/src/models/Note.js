@@ -18,7 +18,7 @@ const noteSchema = new mongoose.Schema(
     categoryId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
-      required: false, //old notes without categories don't break
+      required: false, //old notes ko safe rakhne ke liye required false rakha hai, agar category delete ho jaye to bhi note safe rahega
     },
   },
   { timestamps: true }

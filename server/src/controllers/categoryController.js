@@ -7,8 +7,9 @@ export const createCategory = async (req, res) => {
 
     if (!name) return res.status(400).json({ message: "Category name is required." });
 
-    const newCategory = new Category({ userId, name, description });
+    const newCategory = new Category({ userId, name, description }); 
     const savedCategory = await newCategory.save();
+
     res.status(201).json({ message: "Category created", category: savedCategory });
   } catch (error) {
     console.error("Error creating category:", error);
@@ -20,6 +21,7 @@ export const getUserCategories = async (req, res) => {
   try {
     const userId = req.user._id;
     const categories = await Category.find({ userId }).sort({ createdAt: -1 });
+
     res.status(200).json(categories);
   } catch (error) {
     console.error("Error fetching categories:", error);
@@ -32,6 +34,7 @@ export const deleteCategory = async (req, res) => {
     const categoryId = req.params.id;
     const userId = req.user._id;
     const deletedCategory = await Category.findOneAndDelete({ _id: categoryId, userId });
+
     if (!deletedCategory) return res.status(404).json({ message: "Not found or unauthorized" });
     res.status(200).json({ message: "Category deleted" });
   } catch (error) {
@@ -46,6 +49,7 @@ export const updateCategory = async (req, res) => {
     const categoryId = req.params.id;
     const userId = req.user._id;
 
+    
     const updatedCategory = await Category.findOneAndUpdate(
       { _id: categoryId, userId },
       { name },

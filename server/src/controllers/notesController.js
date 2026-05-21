@@ -27,11 +27,12 @@ const generateSummary = async (req, res) => {
     Return a clear explanation with headings, bullet points, and simple language.`;
 
     const response = await genAi.models.generateContent({
-      model: "gemini-2.5-flash", 
+      model: "gemini-3.1-flash-lite", 
       contents: prompt,
     });
 
     const text = response.text;
+
 
     const newNote = new Note({
       userId: finalUserId,
@@ -72,6 +73,7 @@ const getAllNotes = async (req, res) => {
       return res.status(400).json({ error: "UserId is required." });
     }
 
+    
     const notes = await Note.find({ userId });
     res.status(200).json(notes);
   } catch (e) {
