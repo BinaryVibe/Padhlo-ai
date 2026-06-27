@@ -10,7 +10,6 @@ const HomePage = () => {
 
   return (
     <div>
-      {/* --- TOP SECTION (UNTOUCHED) --- */}
       <div className="main-heading">
         <h1 className="text">AI-Powered Study Assisstant</h1>
         <h4 className="text">Learn Better. Faster. Easier.</h4>
@@ -56,7 +55,6 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* --- UPDATED BOTTOM SECTION (Full Width & Consistent) --- */}
       <div className="bottom-sec-wrapper">
         <div className="bottom-sec" id="about-section">
           
@@ -76,13 +74,20 @@ const HomePage = () => {
 
           <div className="bottom-bottom-row">
             <div className="creator">
-              <h3>Made by</h3>
+              <h3>Creators & Contributors</h3>
               <p>
                 <strong>Ayaan Ahmed Khan</strong>
                 <br />
                 Student | Developer | Learning with AI
                 <br />
                 <a href="https://www.linkedin.com/in/ayaan-ahmed-khan-448600351" target="_blank" rel="noopener noreferrer">Let's connect</a>
+              </p>
+              <p style={{ marginTop: '15px' }}>
+                <strong>Muhammad Talal</strong>
+                <br />
+                Contributor | Quiz Module
+                <br />
+                <a href="https://www.linkedin.com/in/muhammad-talal-1675a0351/" target="_blank" rel="noopener noreferrer">Let's connect</a>
               </p>
             </div>
 
